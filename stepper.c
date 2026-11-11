@@ -297,6 +297,14 @@ bool st_is_stepping (void)
     return stepping && st.exec_block;
 }
 
+// GRBL2MACH: true when the next stepper interrupt would find no step segment to execute. A host
+// driver uses it to tell the end of a motion from a segment buffer that ran dry (the foreground
+// process did not prepare segments in time), in which case it should wait for the next segment.
+bool st_segment_buffer_empty (void)
+{
+    return (st.exec_segment == NULL || st.step_count == 0) && segment_buffer.tail == segment_buffer.head;
+}
+
 #if SPINDLE_SYNC_ENABLE
 
 typedef struct {

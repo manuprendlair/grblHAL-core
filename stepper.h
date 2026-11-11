@@ -135,6 +135,7 @@ void st_go_idle (void);
 
 // Returns true if motion is ongoing
 bool st_is_stepping (void);
+bool st_segment_buffer_empty (void); // GRBL2MACH
 
 // Reset the stepper subsystem variables
 void st_reset (void);
